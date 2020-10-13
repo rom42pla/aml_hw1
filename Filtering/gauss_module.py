@@ -98,7 +98,7 @@ def gaussianfilter(img, sigma):
     kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
 
     smooth_img = convolve(img, kernel)
-    smooth_img = convolve(img, kernel.transpose())
+    smooth_img = convolve(smooth_img, kernel.transpose())
 
     return smooth_img
 
