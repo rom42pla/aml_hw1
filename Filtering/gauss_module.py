@@ -88,7 +88,7 @@ def gaussianfilter_2d(img, sigma):
     kernel = gauss(sigma)[0]
     kernel = np.outer(kernel, kernel)
     kernel = kernel/kernel.sum()
-    smooth_img = conv2(img, kernel)
+    smooth_img = conv2(img, kernel, 'same')
 
     return smooth_img
 
@@ -97,8 +97,8 @@ def gaussianfilter(img, sigma):
     kernel = gauss(sigma)[0]
     kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
 
-    smooth_img = conv2(img, kernel)
-    smooth_img = conv2(smooth_img, kernel.transpose())
+    smooth_img = conv2(img, kernel, 'same')
+    smooth_img = conv2(smooth_img, kernel.transpose(), 'same')
 
     return smooth_img
 
