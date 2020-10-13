@@ -120,7 +120,7 @@ def gaussderiv(img, sigma):
     kernel = gaussdx(sigma)[0]
     kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
 
-    imgDx = convolve(img, kernel)
-    imgDy = convolve(img, kernel.transpose())
+    imgDx = conv2(img, kernel, 'same')
+    imgDy = conv2(img, kernel.transpose(), 'same')
 
     return imgDx, imgDy
