@@ -8,26 +8,6 @@ from scipy.signal import convolve2d as conv2
 """
 Convolve function [...]
 """
-def convolve_ex(img, kernel):
-
-    # Shapes of Kernel + Image
-    xKernShape = kernel.shape[0]
-    yKernShape = kernel.shape[1]
-    xImgShape = img.shape[0]
-    yImgShape = img.shape[1]
-
-    # Shape of Output Convolution
-    xOutput = int((xImgShape - xKernShape) + 1)
-    yOutput = int((yImgShape - yKernShape) + 1)
-    smooth_img = np.zeros((xOutput, yOutput))
-
-    # Iterate through image
-    for y in range(img.shape[1] - yKernShape):
-        for x in range(img.shape[0] - xKernShape):
-            smooth_img[x, y] = (kernel * img[x: x + xKernShape, y: y + yKernShape]).sum()
-
-    return smooth_img
-
 def convolve(img, kernel):
 
     image_height = img.shape[0]
