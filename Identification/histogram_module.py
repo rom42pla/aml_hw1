@@ -145,7 +145,7 @@ def is_grayvalue_hist(hist_name):
 
 def get_hist_by_name(img, num_bins_gray, hist_name):
     if hist_name == 'grayvalue':
-        return normalized_hist(img, num_bins_gray)
+        return normalized_hist(img, num_bins_gray)[0]
     elif hist_name == 'rgb':
         return rgb_hist(img, num_bins_gray)
     elif hist_name == 'rg':
