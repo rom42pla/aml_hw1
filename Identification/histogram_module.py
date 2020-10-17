@@ -10,6 +10,8 @@ parentdir = os.path.dirname(currentdir)
 filteringpath = os.path.join(parentdir, 'Filtering')
 sys.path.insert(0,filteringpath)
 import gauss_module
+# needed for convolutions
+from scipy.signal import convolve2d as conv2
 
 
 
