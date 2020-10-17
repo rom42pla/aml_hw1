@@ -17,9 +17,9 @@ def plot_rpc(D, plot_color):
     
     recall = []
     precision = []
-    num_queries = D.shape[1]
+    num_queries = D.shape[0]
     
-    num_images = D.shape[0]
+    num_images = D.shape[1]
     assert(num_images == num_queries), 'Distance matrix should be a square matrix'
     
     labels = np.diag([1]*num_images)
