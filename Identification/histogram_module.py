@@ -117,22 +117,28 @@ def dxdy_hist(img_gray, num_bins):
     assert len(img_gray.shape) == 2, 'image dimension mismatch'
     assert img_gray.dtype == 'float', 'incorrect image type'
 
+    sigma, caps = 3, (-6, 6)
+    kernel = gauss_module.gaussdx(sigma)[0]
+    kernel = kernel[int((len(kernel)-1)/2) + caps[0] : int((len(kernel)+1)/2) + caps[1]]
+    kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
 
-    #... (your code here)
+    imgDx = conv2(img_gray, kernel, 'same')
+    imgDy = conv2(img_gray, kernel.transpose(), 'same')
 
+    # rescaling to [0, 255]
+    def scale(img):
+        img_flat = img.flatten()
+        img_scaled = ((img- min(img_flat)) / (max(img_flat) - min(img_flat))) * 255
+        return img_scaled
+
+    imgDx, imgDy, imgDz = scale(imgDx), scale(imgDy), np.zeros_like(imgDx)
+    img_concat = np.zeros(shape=(imgDx.shape[0], imgDx.shape[1], 3))
+    img_concat[:,:,0], img_concat[:,:,1], img_concat[:,:,2] = imgDx, imgDy, imgDz
 
     #Define a 2D histogram  with "num_bins^2" number of entries
-    hists = np.zeros((num_bins, num_bins))
+    hists = rg_hist(img_concat.astype('double'), num_bins)
 
-
-    #... (your code here)
-
-
-    #Return the histogram as a 1D vector
-    hists = hists.reshape(hists.size)
     return hists
-
-
 
 def is_grayvalue_hist(hist_name):
     if hist_name == 'grayvalue' or hist_name == 'dxdy':
