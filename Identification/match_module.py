@@ -79,12 +79,12 @@ def show_neighbors(model_images, query_images, dist_type, hist_type, num_bins):
     best_match, D = find_best_match(model_images, query_images, dist_type, hist_type, num_bins)
     nearest_img_index = D.argsort(axis=1)[:,::-1][:,:num_nearest]
     
-    for i in range(len(query_images)):
+    for i in range(num_nearest):
         # nearest for query_image i
-        for j in range(num_nearest):
+        for j in range(len(query_images)):
             idx_img = nearest_img_index[i][j]
             img_color = np.array(Image.open(model_images[idx_img]))
-            plt.subplot(len(query_images), num_nearest, 1 + (i * num_nearest) + j)
+            plt.subplot(len(query_images), num_nearest, 1 + (j * num_nearest) + i)
             plt.imshow(img_color)
             
     plt.show()
