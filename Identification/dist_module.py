@@ -12,7 +12,7 @@ def dist_intersect(x,y):
     d = ((minimum / x.sum()) + (minimum / y.sum())) / 2
     
     if (d >= 0) and (d <=1):
-        return d
+        return (1 - d)
     else:
         raise ValueError('the distance is not between 0 and 1')
 

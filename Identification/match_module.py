@@ -31,14 +31,14 @@ def find_best_match(model_images, query_images, dist_type, hist_type, num_bins):
     model_hists = compute_histograms(model_images, hist_type, hist_isgray, num_bins)
     query_hists = compute_histograms(query_images, hist_type, hist_isgray, num_bins)
     
-    D = np.zeros((len(query_images), len(model_images)))
+    D = np.zeros((len(model_images), len(query_images)))
     
     #... (your code here)
-    for i in range(len(query_images)):
-        for j in range(len(model_images)):
-            D[i][j] = dist_module.get_dist_by_name(query_hists[i], model_hists[j], dist_type)
+    for i in range(len(model_images)):
+        for j in range(len(query_images)):
+            D[i][j] = dist_module.get_dist_by_name( model_hists[i], query_hists[j], dist_type)
     
-    best_match = D.argmax(axis=1) # or axis=0 ?!?!?!
+    best_match = D.argmin(axis=0) # or axis=0 ?!?!?!
 
     return best_match, D
 
@@ -77,14 +77,14 @@ def show_neighbors(model_images, query_images, dist_type, hist_type, num_bins):
 
     #... (your code here)
     best_match, D = find_best_match(model_images, query_images, dist_type, hist_type, num_bins)
-    nearest_img_index = D.argsort(axis=1)[:,::-1][:,:num_nearest]
+    nearest_img_index = D.argsort(axis=0)[:num_nearest,:]
     
-    for i in range(len(query_images)):
+    for i in range(num_nearest):
         # nearest for query_image i
-        for j in range(num_nearest):
+        for j in range(len(query_images)):
             idx_img = nearest_img_index[i][j]
             img_color = np.array(Image.open(model_images[idx_img]))
-            plt.subplot(len(query_images), num_nearest, 1 + (i * num_nearest) + j)
+            plt.subplot(len(query_images), num_nearest, 1 + (j * num_nearest) + i)
             plt.imshow(img_color)
             
     plt.show()
