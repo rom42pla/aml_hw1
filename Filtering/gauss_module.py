@@ -3,6 +3,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from scipy.signal import convolve2d as conv2
+from scipy.signal import convolve as conv
 
 
 """
@@ -75,12 +76,14 @@ def gaussianfilter_2d(img, sigma):
 
 def gaussianfilter(img, sigma):
     kernel = gauss(sigma)[0]
-    kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
+    kernel = (kernel/kernel.sum())
 
-    smooth_img = conv2(img, kernel, 'same')
-    smooth_img = conv2(smooth_img, kernel.transpose(), 'same')
+    # Applying the gaussian kernel over rows and columns separatelly 
+    smooth_img = np.apply_along_axis(lambda x: conv(x, kernel, "same"), 0, img)
+    smooth_img = np.apply_along_axis(lambda x: conv(x, kernel, "same"), 1, smooth_img)
 
     return smooth_img
+
 
 
 """
@@ -98,9 +101,9 @@ def gaussdx(sigma):
 
 def gaussderiv(img, sigma):
     kernel = gaussdx(sigma)[0]
-    kernel = (kernel/kernel.sum()).reshape(1,kernel.shape[0])
+    kernel = (kernel/kernel.sum())
 
-    imgDx = conv2(img, kernel, 'same')
-    imgDy = conv2(img, kernel.transpose(), 'same')
+    imgDx = np.apply_along_axis(lambda x: conv(x, kernel, "same"), 0, img)
+    imgDy = np.apply_along_axis(lambda x: conv(x, kernel, "same"), 1, img)
 
     return imgDx, imgDy
