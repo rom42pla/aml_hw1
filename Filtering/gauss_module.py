@@ -107,7 +107,7 @@ def gaussderiv(img, sigma):
     imgDy = np.apply_along_axis(lambda x: conv(x, kernel, "same"), 1, img)
 
     return imgDx, imgDy
-"""
+
 
 
 def gaussderiv(img, sigma):
@@ -118,7 +118,17 @@ def gaussderiv(img, sigma):
     Dx = (Dx/Dx.sum())
     Dx = Dx.reshape(1, Dx.size)
 
-    imgDx = conv2(conv2(img, Gx.T, 'same'), Dx, 'same')
-    imgDy = conv2(conv2(img, Gx, 'same'), Dx.T, 'same')
+    imgDx = conv2(conv2(img, Gx, 'same'), Dx.T, 'same')
+    imgDy = conv2(conv2(img, Gx.T, 'same'), Dx, 'same')
+
+    return imgDx, imgDy
+"""
+
+def gaussderiv(img, sigma):
+    
+    Dx = np.array([[1]*3,[0]*3,[-1]*3])
+    Dy = np.array([[1]+[0]+[-1]]*3)
+    imgDx = gaussianfilter(conv2(img, Dx, 'same'), sigma)
+    imgDy = gaussianfilter(conv2(img, Dy, 'same'), sigma)
 
     return imgDx, imgDy
