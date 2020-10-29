@@ -17,7 +17,7 @@ Check the [text](https://github.com/rom42pla/aml_hw1/blob/main/text.pdf) for mor
 ## How to check our results?
 You can easily check the [Google Colab notebook](https://colab.research.google.com/drive/1e8uQQk0W4IZt_W05wa1c1IPVTPT36XB1#scrollTo=wBM_07sWd_81) that already contains the output of the various tasks.
 
-Some questions that requires particular explanations are shown in a brief [report](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+Some questions that requires particular explanations are shown in a brief [report](https://github.com/rom42pla/aml_hw1/blob/main/report.pdf).
 
 If you prefer to run the code on your device follow these steps instead:
 
@@ -29,4 +29,4 @@ The latter will popup all the plots on screen and the standard output to the con
 ## Resources
 - [Text](https://github.com/rom42pla/aml_hw1/blob/main/text.pdf)
 - [Google Colab notebook](https://colab.research.google.com/drive/1e8uQQk0W4IZt_W05wa1c1IPVTPT36XB1#scrollTo=wBM_07sWd_81)
-- [Report](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+- [Report](https://github.com/rom42pla/aml_hw1/blob/main/report.pdf)
